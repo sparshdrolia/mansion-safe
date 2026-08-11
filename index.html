@@ -1,178 +1,645 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Fun Times — Mansion Security</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=IM+Fell+English+SC&family=Special+Elite&display=swap');
 
-    <title>SAFE</title>
+:root{
+  --paper:#d9c49d;
+  --paper2:#cdb486;
+  --ink:#211b13;
+  --faded:#675640;
+  --red:#7d2722;
+  --green:#8fae70;
+  --metal:#24231f;
+  --gold:#9a7742;
+}
 
-    <style>
-        * {
-            box-sizing: border-box;
-        }
+*{box-sizing:border-box}
 
-        body {
-            margin: 0;
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background: #151515;
-            font-family: monospace;
-        }
+body{
+  margin:0;
+  min-height:100vh;
+  color:var(--ink);
+  background:#171612;
+  font-family:"Special Elite","Courier New",monospace;
+  overflow-x:hidden;
+}
 
-        .safe {
-            width: min(90vw, 380px);
-            padding: 35px 25px;
-            background: #252525;
-            border: 3px solid #444;
-            border-radius: 12px;
-            box-shadow:
-                0 0 0 6px #181818,
-                0 15px 40px rgba(0,0,0,0.7);
-            text-align: center;
-        }
+body:before{
+  content:"";
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  opacity:.16;
+  background:
+    repeating-linear-gradient(0deg,rgba(255,255,255,.08) 0 1px,transparent 1px 4px),
+    repeating-linear-gradient(90deg,rgba(0,0,0,.05) 0 1px,transparent 1px 5px);
+  mix-blend-mode:multiply;
+}
 
-        .title {
-            color: #aaa;
-            font-size: 18px;
-            letter-spacing: 5px;
-            margin-bottom: 25px;
-        }
+.paper{
+  width:min(1120px,100%);
+  min-height:100vh;
+  margin:auto;
+  position:relative;
+  padding:24px 42px 34px;
+  background:
+    radial-gradient(circle at 14% 18%,rgba(80,50,20,.13) 0 2px,transparent 3px),
+    radial-gradient(circle at 78% 67%,rgba(80,50,20,.10) 0 2px,transparent 3px),
+    linear-gradient(110deg,rgba(255,255,255,.12),transparent 35%,rgba(90,50,20,.08)),
+    var(--paper);
+  background-size:13px 13px,19px 19px,100% 100%,auto;
+  box-shadow:0 0 60px rgba(0,0,0,.75),inset 0 0 70px rgba(70,40,10,.25);
+  overflow:hidden;
+}
 
-        .display {
-            width: 100%;
-            padding: 18px 10px;
-            background: #080808;
-            border: 2px solid #555;
-            border-radius: 5px;
-            color: #ddd;
-            font-size: 38px;
-            letter-spacing: 12px;
-            text-align: center;
-            margin-bottom: 25px;
-        }
+.paper:after{
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  box-shadow:inset 0 0 50px rgba(48,28,10,.25);
+}
 
-        .keypad {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 10px;
-        }
+.topline{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  font-size:11px;
+  letter-spacing:2px;
+  color:#514432;
+  margin-bottom:9px;
+}
 
-        button {
-            height: 60px;
-            font-size: 22px;
-            font-family: monospace;
-            color: #ddd;
-            background: #333;
-            border: 2px solid #555;
-            border-radius: 6px;
-            cursor: pointer;
-        }
+.archive{
+  color:var(--red);
+  text-align:center;
+  font-size:13px;
+}
 
-        button:active {
-            background: #555;
-            transform: scale(0.97);
-        }
+.masthead{
+  text-align:center;
+  font-family:"IM Fell English SC",Georgia,serif;
+  font-size:clamp(54px,9vw,106px);
+  line-height:.82;
+  letter-spacing:2px;
+  margin:7px 0 8px;
+  text-shadow:1px 1px 0 rgba(255,255,255,.18);
+}
 
-        .clear {
-            grid-column: span 3;
-            height: 45px;
-            font-size: 16px;
-            margin-top: 5px;
-        }
+.tagline{
+  text-align:center;
+  font-size:11px;
+  letter-spacing:3px;
+  margin-bottom:10px;
+}
 
-        #status {
-            margin-top: 22px;
-            font-size: 20px;
-            letter-spacing: 3px;
-            color: #d44;
-        }
+.double-rule{
+  border-top:3px double var(--ink);
+  height:9px;
+}
 
-        #status.unlocked {
-            color: #55d66b;
-        }
-    </style>
+.page-meta{
+  display:flex;
+  justify-content:space-between;
+  font-size:10px;
+  letter-spacing:2px;
+  margin:4px 0 18px;
+}
+
+.story-head{
+  text-align:center;
+  max-width:800px;
+  margin:0 auto 17px;
+}
+
+.kicker{
+  font-size:10px;
+  letter-spacing:3px;
+  color:var(--red);
+  margin-bottom:8px;
+}
+
+h1{
+  font-family:"IM Fell English SC",Georgia,serif;
+  font-size:clamp(34px,5vw,62px);
+  line-height:.95;
+  margin:0 0 9px;
+}
+
+.dek{
+  font-family:Georgia,serif;
+  font-size:17px;
+  line-height:1.35;
+  margin:auto;
+  max-width:760px;
+}
+
+.content{
+  display:grid;
+  grid-template-columns:180px minmax(360px,540px) 180px;
+  justify-content:center;
+  align-items:start;
+  gap:22px;
+  margin-top:18px;
+}
+
+.note{
+  position:relative;
+  font-size:12px;
+  line-height:1.55;
+}
+
+.note p{margin:0 0 18px}
+
+.note .scribble{
+  font-family:cursive;
+  font-size:17px;
+  transform:rotate(-4deg);
+  margin:20px 3px;
+}
+
+.note .red{
+  color:var(--red);
+  font-weight:bold;
+}
+
+.stamp{
+  display:inline-block;
+  color:var(--red);
+  border:2px solid var(--red);
+  padding:7px 9px;
+  font-size:11px;
+  line-height:1.1;
+  transform:rotate(-5deg);
+  margin:8px 0 20px;
+}
+
+.clipping{
+  border:1px solid rgba(33,27,19,.45);
+  padding:12px;
+  background:rgba(245,230,193,.24);
+  transform:rotate(1.2deg);
+  box-shadow:2px 3px 0 rgba(40,25,10,.08);
+}
+
+.clipping strong{
+  display:block;
+  color:var(--red);
+  margin-bottom:5px;
+}
+
+.safe{
+  position:relative;
+  background:
+    linear-gradient(135deg,#3a3831,#171713 48%,#302e27);
+  border:4px solid #11100e;
+  border-radius:12px;
+  padding:24px 25px 20px;
+  box-shadow:
+    0 18px 25px rgba(0,0,0,.48),
+    inset 0 0 0 2px #5d5749,
+    inset 0 0 30px rgba(0,0,0,.8);
+}
+
+.safe:before{
+  content:"";
+  position:absolute;
+  inset:8px;
+  border:1px solid #706652;
+  border-radius:5px;
+  pointer-events:none;
+}
+
+.plate{
+  position:relative;
+  z-index:1;
+  text-align:center;
+  color:#c9b98f;
+  border:1px solid #907348;
+  padding:11px 8px;
+  margin:0 20px 18px;
+  box-shadow:inset 0 0 0 2px rgba(0,0,0,.4);
+  font-family:Georgia,serif;
+  font-size:17px;
+  letter-spacing:1px;
+}
+
+.plate small{
+  display:block;
+  font-family:"Special Elite",monospace;
+  font-size:9px;
+  letter-spacing:3px;
+  margin-top:5px;
+  color:#918264;
+}
+
+.display-frame{
+  position:relative;
+  z-index:1;
+  padding:7px;
+  margin:0 18px 15px;
+  background:#0c0c0a;
+  border:2px solid #635b4c;
+  box-shadow:inset 0 0 14px #000;
+}
+
+.display{
+  height:68px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:
+    repeating-linear-gradient(0deg,rgba(160,200,130,.035) 0 2px,transparent 2px 4px),
+    #172217;
+  color:var(--green);
+  border:1px solid #071007;
+  font-size:38px;
+  letter-spacing:12px;
+  padding-left:12px;
+  text-shadow:0 0 10px rgba(170,220,140,.55);
+  transition:.25s;
+}
+
+.display.success{
+  background:#1c351d;
+  color:#c5e9a7;
+  text-shadow:0 0 16px rgba(170,255,130,.8);
+}
+
+.enter-label{
+  color:#9d8c6c;
+  text-align:center;
+  font-size:10px;
+  letter-spacing:3px;
+  margin:10px 0 12px;
+}
+
+.keypad{
+  position:relative;
+  z-index:1;
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:9px;
+  max-width:360px;
+  margin:auto;
+}
+
+.key{
+  height:55px;
+  border:2px solid #11100e;
+  border-radius:50%;
+  color:#d7c8a8;
+  background:radial-gradient(circle at 35% 30%,#555047,#292822 65%);
+  font:22px "Special Elite",monospace;
+  box-shadow:0 3px 0 #0b0b09,inset 0 1px 1px rgba(255,255,255,.16);
+  cursor:pointer;
+  transition:.08s;
+}
+
+.key:hover{filter:brightness(1.15)}
+.key:active{transform:translateY(3px);box-shadow:0 0 0 #0b0b09}
+
+.key.clear,.key.enter{
+  border-radius:8px;
+  height:43px;
+  font-size:11px;
+  letter-spacing:2px;
+}
+
+.key.clear{color:#c56c5f}
+.key.enter{color:#a9cb8c}
+
+.status{
+  position:relative;
+  z-index:1;
+  text-align:center;
+  margin-top:17px;
+  padding:8px;
+  border:1px solid #514a3e;
+  background:#11110f;
+  color:#b5483e;
+  font-size:13px;
+  letter-spacing:4px;
+}
+
+.status.success{
+  color:#a9d18b;
+}
+
+.hint{
+  text-align:center;
+  margin:15px 0 0;
+  color:#83765e;
+  font-size:9px;
+  letter-spacing:1.5px;
+}
+
+.bottom{
+  margin-top:24px;
+  border-top:3px double var(--ink);
+  padding-top:13px;
+  display:flex;
+  justify-content:space-between;
+  font-size:9px;
+  letter-spacing:2px;
+}
+
+.overlay{
+  position:fixed;
+  inset:0;
+  background:rgba(8,8,6,.82);
+  backdrop-filter:blur(3px);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  z-index:20;
+  padding:25px;
+}
+
+.overlay.show{display:flex}
+
+.reveal{
+  width:min(520px,100%);
+  padding:35px;
+  text-align:center;
+  background:var(--paper);
+  color:var(--ink);
+  box-shadow:0 20px 60px #000;
+  border:4px double var(--ink);
+}
+
+.reveal .redline{
+  color:var(--red);
+  letter-spacing:3px;
+  font-size:11px;
+}
+
+.reveal h2{
+  font:44px "IM Fell English SC",Georgia,serif;
+  margin:12px 0;
+}
+
+.reveal p{
+  font-family:Georgia,serif;
+  line-height:1.6;
+}
+
+.close{
+  margin-top:20px;
+  padding:10px 22px;
+  background:var(--ink);
+  color:var(--paper);
+  border:0;
+  font-family:"Special Elite",monospace;
+  cursor:pointer;
+}
+
+.shake{animation:shake .28s}
+.flash{animation:flash .45s}
+
+@keyframes shake{
+  20%,60%{transform:translateX(-5px)}
+  40%,80%{transform:translateX(5px)}
+}
+@keyframes flash{
+  0%,100%{filter:none}
+  50%{filter:brightness(2)}
+}
+
+@media(max-width:800px){
+  .paper{padding:20px 18px 28px}
+  .content{grid-template-columns:1fr}
+  .note{display:none}
+  .safe{max-width:500px;margin:auto}
+  .dek{font-size:15px}
+  .bottom{margin-top:20px}
+}
+
+@media(max-width:430px){
+  .masthead{font-size:45px}
+  .page-meta{font-size:8px}
+  .safe{padding:19px 13px 16px}
+  .plate{margin-left:10px;margin-right:10px}
+  .display-frame{margin-left:8px;margin-right:8px}
+}
+</style>
 </head>
 
 <body>
 
-<div class="safe">
+<main class="paper">
 
-    <div class="title">SECURITY LOCK</div>
+  <div class="topline">
+    <span>EST. 1924</span>
+    <span class="archive">SPECIAL ARCHIVE EDITION</span>
+    <span>5TH PAGE</span>
+  </div>
 
-    <div id="display" class="display">---</div>
+  <div class="double-rule"></div>
 
-    <div class="keypad">
-        <button onclick="press(1)">1</button>
-        <button onclick="press(2)">2</button>
-        <button onclick="press(3)">3</button>
+  <div class="masthead">THE FUN TIMES</div>
 
-        <button onclick="press(4)">4</button>
-        <button onclick="press(5)">5</button>
-        <button onclick="press(6)">6</button>
+  <div class="tagline">★ WE REPORT WHAT OTHERS DON'T DARE TO PRINT ★</div>
 
-        <button onclick="press(7)">7</button>
-        <button onclick="press(8)">8</button>
-        <button onclick="press(9)">9</button>
+  <div class="double-rule"></div>
 
-        <button onclick="press(0)">0</button>
+  <div class="page-meta">
+    <span>FRIDAY, MAY 24, 1924</span>
+    <span>PRIVATE ESTATE RECORD</span>
+    <span>PRICE: ONE PENNY</span>
+  </div>
 
-        <button class="clear" onclick="clearCode()">CLEAR</button>
-    </div>
+  <section class="story-head">
+    <div class="kicker">THE MANSION FILE • SECURITY NOTICE</div>
+    <h1>A LOCK THAT OPENS THE NEXT CHAPTER.</h1>
+    <p class="dek">
+      Deep inside the mansion, behind a door that shouldn't exist,
+      we found this. The mechanism is intact. <span style="color:var(--red)">The code is not.</span>
+    </p>
+  </section>
 
-    <div id="status">LOCKED</div>
+  <section class="content">
 
+    <aside class="note">
+      <div class="scribble">3 digits.<br>One correct combination.<br>Infinite wrong ones.</div>
+
+      <div class="stamp">CONFIDENTIAL<br>DO NOT DISCLOSE</div>
+
+      <p>
+        Someone has been through this room before us.
+        The evidence suggests they knew exactly what
+        they were looking for.
+      </p>
+
+      <p class="red">PAY ATTENTION.</p>
+    </aside>
+
+    <section class="safe" id="safe">
+
+      <div class="plate">
+        MANSION SECURITY UNIT
+        <small>— INTERACTIVE ACCESS PANEL —</small>
+      </div>
+
+      <div class="display-frame">
+        <div class="display" id="display">---</div>
+      </div>
+
+      <div class="enter-label">ENTER 3-DIGIT CODE</div>
+
+      <div class="keypad">
+        <button class="key" onclick="press(1)">1</button>
+        <button class="key" onclick="press(2)">2</button>
+        <button class="key" onclick="press(3)">3</button>
+
+        <button class="key" onclick="press(4)">4</button>
+        <button class="key" onclick="press(5)">5</button>
+        <button class="key" onclick="press(6)">6</button>
+
+        <button class="key" onclick="press(7)">7</button>
+        <button class="key" onclick="press(8)">8</button>
+        <button class="key" onclick="press(9)">9</button>
+
+        <button class="key clear" onclick="clearCode()">CLEAR</button>
+        <button class="key" onclick="press(0)">0</button>
+        <button class="key enter" onclick="submitCode()">ENTER</button>
+      </div>
+
+      <div class="status" id="status">● &nbsp; LOCKED &nbsp; ●</div>
+
+      <div class="hint">ESTATE SECURITY SYSTEM • ACCESS RESTRICTED</div>
+
+    </section>
+
+    <aside class="note">
+
+      <div class="clipping">
+        <strong>OLD NOTE FOUND</strong>
+        Among the debris, we found a note.
+        It simply said:
+        <br><br>
+        <span class="red">“The truth is three digits away.”</span>
+      </div>
+
+      <div class="scribble">
+        The mansion doesn't give up
+        its secrets easily.
+      </div>
+
+      <p>◉</p>
+
+      <p>
+        If the lock opens, whatever lies
+        beyond it may explain why the
+        room was sealed.
+      </p>
+
+    </aside>
+
+  </section>
+
+  <div class="bottom">
+    <span>ESTATE ARCHIVES</span>
+    <span>SOME DOORS OPEN ONLY FOR THOSE WHO PAY ATTENTION.</span>
+    <span>PAGE 01 / 01</span>
+  </div>
+
+</main>
+
+<div class="overlay" id="overlay">
+  <div class="reveal">
+    <div class="redline">ACCESS GRANTED • SECURITY OVERRIDE</div>
+    <h2>UNLOCKED</h2>
+    <p>
+      The mechanism clicks once.
+      Then silence.
+      <br><br>
+      Something inside the mansion has just changed.
+    </p>
+    <button class="close" onclick="closeReveal()">CONTINUE</button>
+  </div>
 </div>
 
 <script>
-
 let code = "";
 
-function press(number) {
+const CORRECT_CODE = "937";
 
-    if (code.length >= 3) {
-        return;
-    }
+const display = document.getElementById("display");
+const statusEl = document.getElementById("status");
+const safe = document.getElementById("safe");
+const overlay = document.getElementById("overlay");
 
-    code += number;
+function render() {
+  let shown = "";
+  for (let i = 0; i < 3; i++) {
+    shown += i < code.length ? code[i] : "-";
+  }
+  display.textContent = shown;
+}
 
-    updateDisplay();
+function press(n) {
+  if (code.length >= 3) return;
 
-    if (code === "937") {
-        document.getElementById("status").textContent = "UNLOCKED";
-        document.getElementById("status").classList.add("unlocked");
-    } else {
-        document.getElementById("status").textContent = "LOCKED";
-        document.getElementById("status").classList.remove("unlocked");
-    }
+  code += String(n);
+  render();
+
+  if (code.length === 3) {
+    submitCode();
+  }
 }
 
 function clearCode() {
-
-    code = "";
-
-    updateDisplay();
-
-    document.getElementById("status").textContent = "LOCKED";
-    document.getElementById("status").classList.remove("unlocked");
+  code = "";
+  display.textContent = "---";
+  display.classList.remove("success");
+  statusEl.classList.remove("success");
+  statusEl.innerHTML = "● &nbsp; LOCKED &nbsp; ●";
 }
 
-function updateDisplay() {
+function submitCode() {
+  if (code.length !== 3) return;
 
-    let display = "";
+  if (code === CORRECT_CODE) {
+    display.classList.add("success");
+    statusEl.classList.add("success");
+    statusEl.innerHTML = "● &nbsp; ACCESS GRANTED &nbsp; ●";
+    display.classList.add("flash");
 
-    for (let i = 0; i < 3; i++) {
-        if (i < code.length) {
-            display += code[i];
-        } else {
-            display += "-";
-        }
-    }
+    setTimeout(() => {
+      display.classList.remove("flash");
+      overlay.classList.add("show");
+    }, 550);
+  } else {
+    statusEl.classList.remove("success");
+    statusEl.innerHTML = "● &nbsp; LOCKED &nbsp; ●";
 
-    document.getElementById("display").textContent = display;
+    safe.classList.remove("shake");
+    void safe.offsetWidth;
+    safe.classList.add("shake");
+
+    setTimeout(() => {
+      code = "";
+      render();
+    }, 450);
+  }
 }
 
+function closeReveal() {
+  overlay.classList.remove("show");
+  clearCode();
+}
+
+document.addEventListener("keydown", e => {
+  if (/^\d$/.test(e.key)) press(Number(e.key));
+  if (e.key === "Backspace" || e.key === "Escape") clearCode();
+  if (e.key === "Enter") submitCode();
+});
 </script>
 
 </body>
